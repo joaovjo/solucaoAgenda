@@ -33,38 +33,24 @@ namespace Agenda.Formularios
 
         }
 
-        private void btnNovo_Click(object sender, EventArgs e)
-        {
-            if(btnNovo.Text == "&Novo")
-            {
-                Habilita_Caixas();
-                //Desabilita_Controles()
-                txtNome.Focus();
-                btnNovo.Text = "&Gravar";
+        // ---------------------------------------- MÉTODOS ----------------------------------------
 
-            }
-            else
-            {
-                DS_pessoaTableAdapter taPessoa = new DS_pessoaTableAdapter();
-                taPessoa.Insert(txtNome.Text, txtCidade.Text, dtpDataNasc.Value.ToString(), txtEmail.Text);
-                int Ultimo = int.Parse(taPessoa.BuscarUltimoId().ToString());
-                MessageBox.Show("Cadastro bem sucedido nº" + Ultimo);
-                //Limpa_Caixas
-                Desabilita_Caixas();
-                btnNovo.Text = "&Novo";
-            }
-        }
-        private void Habilita_Caixas()
+        // ---------------------------------------- Habilitar_Caixas(); ----------------------------------------
+
+        private void Habilitar_Caixas()
         {
-            foreach(Control c in this.Controls)
+            foreach (Control c in this.Controls)
             {
-                if((c is TextBox) || (c is DateTimePicker))
+                if ((c is TextBox) || (c is DateTimePicker))
                 {
                     c.Enabled = true;
                 }
             }
         }
-        private void Desabilita_Caixas()
+
+        // ---------------------------------------- Desabilitar_Caixas(); ----------------------------------------
+
+        private void Desabilitar_Caixas()
         {
             foreach (Control c in this.Controls)
             {
@@ -75,6 +61,88 @@ namespace Agenda.Formularios
             }
         }
 
+        // ---------------------------------------- Limpar_Caixas(); ----------------------------------------
+
+        private void Limpar_Caixas()
+        {
+            txtID.Text = "";
+            txtNome.Text = "";
+            txtCidade.Text = "";
+            dtpDataNasc.Text = "";
+            txtEmail.Text = "";
+        }
+
+        // ---------------------------------------- Habilitar_Controles(); ----------------------------------------
+
+        private void Habilitar_Controles()
+        {
+            if (btnNovo.Text == "&Novo")
+            {
+                btnNovo.Enabled = true;
+                btnCancelar.Enabled = false;
+            }
+            else if (btnAlterar.Text == "&Alterar")
+            {
+                btnAlterar.Enabled = true;
+                btnCancelar.Enabled = false;
+            }
+            else
+            {
+                btnExcluir.Enabled = true;
+                btnCancelar.Enabled = false;
+            }
+        }
+        // ---------------------------------------- Desabilitar_Controles(); ----------------------------------------
+
+        private void Desabilitar_Controles()
+        {
+            if (btnNovo.Text == "&Gravar")
+            {
+                btnAlterar.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = true;
+                btnFechar.Enabled = false;
+            }
+            else if (btnAlterar.Text == "&Gravar")
+            {
+                btnNovo.Enabled = false;
+                btnExcluir.Enabled = false;
+                btnCancelar.Enabled = true;
+                btnFechar.Enabled = false;
+            }
+            else
+            {
+                btnNovo.Enabled = false;
+                btnAlterar.Enabled = false;
+                btnCancelar.Enabled = true;
+                btnFechar.Enabled = false;
+            }
+        }
+
+        // ---------------------------------------- FIM DOS MÉTODOS ----------------------------------------
+
+        private void btnNovo_Click(object sender, EventArgs e)
+        {
+            if (btnNovo.Text == "&Novo")
+            {
+                Habilitar_Caixas();
+                //Desabilitar_Controles();
+                txtNome.Focus();
+                btnNovo.Text = "&Gravar";
+
+            }
+            else
+            {
+                DS_pessoaTableAdapter taPessoa = new DS_pessoaTableAdapter();
+                taPessoa.Insert(txtNome.Text, txtCidade.Text, dtpDataNasc.Value.ToString(), txtEmail.Text);
+                int Ultimo = int.Parse(taPessoa.BuscarUltimoId().ToString());
+                MessageBox.Show("Cadastro bem sucedido nº" + Ultimo);
+                //Limpar_Caixas;
+                Desabilitar_Caixas();
+                btnNovo.Text = "&Novo";
+            }
+        }
+
         private void BtnAlterar_Click(object sender, EventArgs e)
         {
             DS_pessoaTableAdapter taPessoa = new DS_pessoaTableAdapter();
@@ -82,7 +150,7 @@ namespace Agenda.Formularios
             if (btnAlterar.Text == "&Alterar")
             {
                 dtPessoa = taPessoa.Pesquisar_Pessoa(int.Parse(txtID.Text));
-                if(dtPessoa.Rows.Count == 0) // Se não achou o ID
+                if (dtPessoa.Rows.Count == 0) // Se não achou o ID
                 {
                     MessageBox.Show("Id não cadastrado");
                 }
@@ -92,7 +160,7 @@ namespace Agenda.Formularios
                     txtCidade.Text = dtPessoa.Rows[0]["cidade"].ToString();
                     dtpDataNasc.Value = DateTime.Parse(dtPessoa.Rows[0]["data_nascimento"].ToString());
                     txtEmail.Text = dtPessoa.Rows[0]["email"].ToString();
-                    Habilita_Caixas();
+                    Habilitar_Caixas();
                     btnAlterar.Text = "&Gravar";
                 }
             }
@@ -100,9 +168,9 @@ namespace Agenda.Formularios
             {
                 taPessoa.Update(txtNome.Text, txtCidade.Text, dtpDataNasc.Value.ToString(), txtEmail.Text, int.Parse(txtID.Text));
                 MessageBox.Show("Alteração bem sucedida");
-                //Limpa_Caixas();
-                Desabilita_Caixas();
-                //Habilita_Controles();
+                //Limpar_Caixas();
+                Desabilitar_Caixas();
+                //Habilitar_Controles();
 
                 btnAlterar.Text = "&Alterar";
 

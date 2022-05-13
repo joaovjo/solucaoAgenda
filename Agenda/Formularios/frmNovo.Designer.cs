@@ -40,14 +40,15 @@ namespace Agenda.Formularios
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
+            this.dS_pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet_Agenda = new Agenda.Dados.DataSet_Agenda();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtCidade = new System.Windows.Forms.TextBox();
             this.dtpDataNasc = new System.Windows.Forms.DateTimePicker();
             this.txtEmail = new System.Windows.Forms.TextBox();
-            this.dS_pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet_Agenda = new Agenda.Dados.DataSet_Agenda();
             this.dS_pessoaTableAdapter = new Agenda.Dados.DataSet_AgendaTableAdapters.DS_pessoaTableAdapter();
             this.tableAdapterManager = new Agenda.Dados.DataSet_AgendaTableAdapters.TableAdapterManager();
+            this.btnCancelar = new System.Windows.Forms.Button();
             idLabel = new System.Windows.Forms.Label();
             nomeLabel = new System.Windows.Forms.Label();
             cidadeLabel = new System.Windows.Forms.Label();
@@ -104,7 +105,7 @@ namespace Agenda.Formularios
             // 
             // btnNovo
             // 
-            this.btnNovo.Location = new System.Drawing.Point(460, 12);
+            this.btnNovo.Location = new System.Drawing.Point(465, 12);
             this.btnNovo.Name = "btnNovo";
             this.btnNovo.Size = new System.Drawing.Size(75, 23);
             this.btnNovo.TabIndex = 0;
@@ -114,7 +115,7 @@ namespace Agenda.Formularios
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(460, 56);
+            this.btnAlterar.Location = new System.Drawing.Point(465, 52);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
             this.btnAlterar.TabIndex = 1;
@@ -124,7 +125,7 @@ namespace Agenda.Formularios
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(460, 100);
+            this.btnExcluir.Location = new System.Drawing.Point(465, 92);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
             this.btnExcluir.TabIndex = 2;
@@ -133,7 +134,7 @@ namespace Agenda.Formularios
             // 
             // btnFechar
             // 
-            this.btnFechar.Location = new System.Drawing.Point(460, 144);
+            this.btnFechar.Location = new System.Drawing.Point(465, 172);
             this.btnFechar.Name = "btnFechar";
             this.btnFechar.Size = new System.Drawing.Size(75, 23);
             this.btnFechar.TabIndex = 3;
@@ -143,11 +144,20 @@ namespace Agenda.Formularios
             // txtID
             // 
             this.txtID.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.dS_pessoaBindingSource, "id", true));
-            this.txtID.Enabled = false;
             this.txtID.Location = new System.Drawing.Point(117, 24);
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(101, 20);
             this.txtID.TabIndex = 6;
+            // 
+            // dS_pessoaBindingSource
+            // 
+            this.dS_pessoaBindingSource.DataMember = "DS_pessoa";
+            this.dS_pessoaBindingSource.DataSource = this.dataSet_Agenda;
+            // 
+            // dataSet_Agenda
+            // 
+            this.dataSet_Agenda.DataSetName = "DataSet_Agenda";
+            this.dataSet_Agenda.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txtNome
             // 
@@ -186,16 +196,6 @@ namespace Agenda.Formularios
             this.txtEmail.Size = new System.Drawing.Size(200, 20);
             this.txtEmail.TabIndex = 14;
             // 
-            // dS_pessoaBindingSource
-            // 
-            this.dS_pessoaBindingSource.DataMember = "DS_pessoa";
-            this.dS_pessoaBindingSource.DataSource = this.dataSet_Agenda;
-            // 
-            // dataSet_Agenda
-            // 
-            this.dataSet_Agenda.DataSetName = "DataSet_Agenda";
-            this.dataSet_Agenda.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // dS_pessoaTableAdapter
             // 
             this.dS_pessoaTableAdapter.ClearBeforeFill = true;
@@ -206,11 +206,22 @@ namespace Agenda.Formularios
             this.tableAdapterManager.DS_pessoaTableAdapter = this.dS_pessoaTableAdapter;
             this.tableAdapterManager.UpdateOrder = Agenda.Dados.DataSet_AgendaTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
+            // btnCancelar
+            // 
+            this.btnCancelar.Enabled = false;
+            this.btnCancelar.Location = new System.Drawing.Point(465, 132);
+            this.btnCancelar.Name = "btnCancelar";
+            this.btnCancelar.Size = new System.Drawing.Size(75, 23);
+            this.btnCancelar.TabIndex = 15;
+            this.btnCancelar.Text = "Cancelar";
+            this.btnCancelar.UseVisualStyleBackColor = true;
+            // 
             // frmNovo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 187);
+            this.ClientSize = new System.Drawing.Size(552, 212);
+            this.Controls.Add(this.btnCancelar);
             this.Controls.Add(idLabel);
             this.Controls.Add(this.txtID);
             this.Controls.Add(nomeLabel);
@@ -250,5 +261,6 @@ namespace Agenda.Formularios
         private System.Windows.Forms.TextBox txtCidade;
         private System.Windows.Forms.DateTimePicker dtpDataNasc;
         private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.Button btnCancelar;
     }
 }
