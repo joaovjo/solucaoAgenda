@@ -249,6 +249,11 @@ namespace Agenda.Formularios
             Limpar_Caixas();
             Desabilitar_Caixas();
             Habilitar_Controles();
+            btnCancelar.Enabled = false;
+
+            btnNovo.Text = "&Novo";
+            btnAlterar.Text = "&Alterar";
+            btnExcluir.Text = "&Excluir";
         }
     }
 }
