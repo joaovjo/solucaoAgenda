@@ -74,25 +74,6 @@ namespace Agenda.Formularios
 
         // ---------------------------------------- Habilitar_Controles(); ----------------------------------------
 
-        //private void Habilitar_Controles()
-        //{
-        //    if (btnNovo.Text == "&Novo")
-        //    {
-        //        btnNovo.Enabled = true;
-        //        btnCancelar.Enabled = true;
-        //    }
-        //    else if (btnAlterar.Text == "&Alterar")
-        //    {
-        //        btnAlterar.Enabled = true;
-        //        btnCancelar.Enabled = true;
-        //    }
-        //    else
-        //    {
-        //        btnExcluir.Enabled = true;
-        //        btnCancelar.Enabled = false;
-        //    }
-        //}
-
         private void Habilitar_Controles()
         {
             foreach (Control controles in this.Controls)
@@ -101,35 +82,11 @@ namespace Agenda.Formularios
                 {
                     controles.Enabled = true;
                 }
+                btnCancelar.Enabled = false;
             }
         }
 
         // ---------------------------------------- Desabilitar_Controles(); ----------------------------------------
-
-        //private void Desabilitar_Controles()
-        //{
-        //    if (btnNovo.Text == "&Gravar")
-        //    {
-        //        btnAlterar.Enabled = false;
-        //        btnExcluir.Enabled = false;
-        //        btnCancelar.Enabled = true;
-        //        btnFechar.Enabled = false;
-        //    }
-        //    else if (btnAlterar.Text == "&Gravar")
-        //    {
-        //        btnNovo.Enabled = false;
-        //        btnExcluir.Enabled = false;
-        //        btnCancelar.Enabled = true;
-        //        btnFechar.Enabled = false;
-        //    }
-        //    else
-        //    {
-        //        btnNovo.Enabled = false;
-        //        btnAlterar.Enabled = false;
-        //        btnCancelar.Enabled = true;
-        //        btnFechar.Enabled = false;
-        //    }
-        //}
 
         private void Desabilitar_Controles()
         {
@@ -163,9 +120,10 @@ namespace Agenda.Formularios
                 DS_pessoaTableAdapter taPessoa = new DS_pessoaTableAdapter();
                 taPessoa.Insert(txtNome.Text, txtCidade.Text, dtpDataNasc.Value.ToString(), txtEmail.Text);
                 int Ultimo = int.Parse(taPessoa.BuscarUltimoId().ToString());
-                MessageBox.Show("Cadastro bem sucedido nº" + Ultimo);
+                MessageBox.Show("Cadastro bem sucedido nº " + Ultimo);
                 Limpar_Caixas();
                 Desabilitar_Caixas();
+                txtID.Enabled = true;
                 Habilitar_Controles();
                 btnNovo.Text = "&Novo";
             }
@@ -215,7 +173,8 @@ namespace Agenda.Formularios
             DataTable dtPessoa;
             if (btnExcluir.Text == "&Excluir")
             {
-                //Desabilitar_Controles();
+                Desabilitar_Controles();
+                btnExcluir.Enabled = true;
                 dtPessoa = taPessoa.Pesquisar_Pessoa(int.Parse(txtID.Text));
                 if (dtPessoa.Rows.Count == 0) // Se não achou o ID
                 {
@@ -223,7 +182,6 @@ namespace Agenda.Formularios
                 }
                 else
                 {
-                    btnAlterar.Text = "&Gravar";
                     txtNome.Text = dtPessoa.Rows[0]["nome"].ToString();
                     txtCidade.Text = dtPessoa.Rows[0]["cidade"].ToString();
                     dtpDataNasc.Value = DateTime.Parse(dtPessoa.Rows[0]["data_nascimento"].ToString());
@@ -236,6 +194,14 @@ namespace Agenda.Formularios
                         Limpar_Caixas();
                         Habilitar_Controles();
                         Desabilitar_Caixas();
+                        txtID.Enabled = true;
+                    }
+                    else
+                    {
+                        Limpar_Caixas();
+                        Desabilitar_Caixas();
+                        txtID.Enabled = true;
+                        Habilitar_Controles();
                     }
 
                     
@@ -248,8 +214,8 @@ namespace Agenda.Formularios
         {
             Limpar_Caixas();
             Desabilitar_Caixas();
+            txtID.Enabled = true;
             Habilitar_Controles();
-            btnCancelar.Enabled = false;
 
             btnNovo.Text = "&Novo";
             btnAlterar.Text = "&Alterar";

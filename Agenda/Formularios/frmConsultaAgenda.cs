@@ -41,7 +41,20 @@ namespace Agenda.Formularios
             {
                 case "Nome":
                     {
-                        if (cmbProcura.Text == "Igual a")
+                        if (cmbProcura.Text == "Todos")
+                        {
+                            dS_pessoaBindingSource.Filter = "";
+                            if (dS_pessoaDataGridView.Rows.Count == 0)
+                            {
+                                MessageBox.Show("Nenhum resultado encontrado!");
+                                lblContador.Text = dS_pessoaBindingSource.Count.ToString();
+                            }
+                            else
+                            {
+                                lblContador.Text = "Exibindo " + dS_pessoaBindingSource.Count.ToString() + " de " + contadorTotal + " itens.";
+                            }
+                        }
+                        else if (cmbProcura.Text == "Igual a")
                         {
                             dS_pessoaBindingSource.Filter = "[Nome] = '" + txtPesquisa.Text + "'";
                             if (dS_pessoaDataGridView.Rows.Count == 0)
@@ -54,6 +67,10 @@ namespace Agenda.Formularios
                             {
                                 lblContador.Text = "Exibindo " + dS_pessoaBindingSource.Count.ToString() + " de " + contadorTotal + " itens.";
                             }
+                        }
+                        else if (cmbProcura.Text == "Que começa com")
+                        {
+
                         }
                         else if (cmbProcura.Text == "Que contém")
                         {
@@ -70,22 +87,13 @@ namespace Agenda.Formularios
                                 // lblContador.Text = dS_pessoaBindingSource.Count.ToString();
                             }
                         }
-                        else if (cmbProcura.Text == "Todos")
-                        {
-                            dS_pessoaBindingSource.Filter = "";
-                            if (dS_pessoaDataGridView.Rows.Count == 0)
-                            {
-                                MessageBox.Show("Nenhum resultado encontrado!");
-                                lblContador.Text = dS_pessoaBindingSource.Count.ToString();
-                            }
-                            else
-                            {
-                                lblContador.Text = "Exibindo " + dS_pessoaBindingSource.Count.ToString() + " de " + contadorTotal + " itens.";
-                            }
-                        }
                         else if (cmbProcura.Text == "Que esteja entre")
                         {
-                            dS_pessoaBindingSource.Filter = "[Nome]";
+
+                        }
+                        else                //Que termina com
+                        {
+
                         }
                         break;
                     }
