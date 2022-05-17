@@ -40,15 +40,15 @@ namespace Agenda.Formularios
             this.btnExcluir = new System.Windows.Forms.Button();
             this.btnFechar = new System.Windows.Forms.Button();
             this.txtID = new System.Windows.Forms.TextBox();
-            this.dS_pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet_Agenda = new Agenda.Dados.DataSet_Agenda();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.txtCidade = new System.Windows.Forms.TextBox();
             this.dtpDataNasc = new System.Windows.Forms.DateTimePicker();
             this.txtEmail = new System.Windows.Forms.TextBox();
+            this.btnCancelar = new System.Windows.Forms.Button();
+            this.dS_pessoaBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet_Agenda = new Agenda.Dados.DataSet_Agenda();
             this.dS_pessoaTableAdapter = new Agenda.Dados.DataSet_AgendaTableAdapters.DS_pessoaTableAdapter();
             this.tableAdapterManager = new Agenda.Dados.DataSet_AgendaTableAdapters.TableAdapterManager();
-            this.btnCancelar = new System.Windows.Forms.Button();
             idLabel = new System.Windows.Forms.Label();
             nomeLabel = new System.Windows.Forms.Label();
             cidadeLabel = new System.Windows.Forms.Label();
@@ -131,6 +131,7 @@ namespace Agenda.Formularios
             this.btnExcluir.TabIndex = 2;
             this.btnExcluir.Text = "&Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // btnFechar
             // 
@@ -148,16 +149,6 @@ namespace Agenda.Formularios
             this.txtID.Name = "txtID";
             this.txtID.Size = new System.Drawing.Size(101, 20);
             this.txtID.TabIndex = 6;
-            // 
-            // dS_pessoaBindingSource
-            // 
-            this.dS_pessoaBindingSource.DataMember = "DS_pessoa";
-            this.dS_pessoaBindingSource.DataSource = this.dataSet_Agenda;
-            // 
-            // dataSet_Agenda
-            // 
-            this.dataSet_Agenda.DataSetName = "DataSet_Agenda";
-            this.dataSet_Agenda.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // txtNome
             // 
@@ -196,16 +187,6 @@ namespace Agenda.Formularios
             this.txtEmail.Size = new System.Drawing.Size(200, 20);
             this.txtEmail.TabIndex = 14;
             // 
-            // dS_pessoaTableAdapter
-            // 
-            this.dS_pessoaTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.DS_pessoaTableAdapter = this.dS_pessoaTableAdapter;
-            this.tableAdapterManager.UpdateOrder = Agenda.Dados.DataSet_AgendaTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
             // btnCancelar
             // 
             this.btnCancelar.Enabled = false;
@@ -215,6 +196,27 @@ namespace Agenda.Formularios
             this.btnCancelar.TabIndex = 15;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
+            // 
+            // dS_pessoaBindingSource
+            // 
+            this.dS_pessoaBindingSource.DataMember = "DS_pessoa";
+            this.dS_pessoaBindingSource.DataSource = this.dataSet_Agenda;
+            // 
+            // dataSet_Agenda
+            // 
+            this.dataSet_Agenda.DataSetName = "DataSet_Agenda";
+            this.dataSet_Agenda.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dS_pessoaTableAdapter
+            // 
+            this.dS_pessoaTableAdapter.ClearBeforeFill = true;
+            // 
+            // tableAdapterManager
+            // 
+            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
+            this.tableAdapterManager.DS_pessoaTableAdapter = this.dS_pessoaTableAdapter;
+            this.tableAdapterManager.UpdateOrder = Agenda.Dados.DataSet_AgendaTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
             // 
             // frmNovo
             // 
